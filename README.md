@@ -49,9 +49,7 @@ The summary would provide with the following information:
 
 ## Current Implementation Status
 
-### First step - basic functionality
-
-So far I've implemented the core foundation:
+### First step - basic functionality (COMPLETE)
 
 - Game class is complete with proper validation and timestamps
 - ScoreBoard interface defines all the required methods
@@ -62,20 +60,18 @@ So far I've implemented the core foundation:
 - Simple getSummary() returns list of active games
 - All tests are passing
 
-### What's not working yet
+### Second step - score management (COMPLETE)
 
-The updateScore() and finishGame() methods just throw UnsupportedOperationException for now. Also the summary doesn't
-sort by total score yet - it just returns games in the order they were added.
+- updateScore() method now works with proper validation
+- finishGame() method removes games from the board
+- Added proper sorting logic for getSummary() (by total score desc, then by most recently added)
+- Created custom exception classes (GameAlreadyExistsException, GameNotFoundException)
+- Added tests for all edge cases
+- The exact example from requirements now works correctly
+- All tests are passing
 
 ### Next steps
 
-Planning to work on:
-
-- Implement updateScore() method with proper validation
-- Implement finishGame() to remove games from the board
-- Add the sorting logic for getSummary() (by total score desc, then by most recently added)
-- Create custom exception classes instead of using generic IllegalArgumentException
-- Add more comprehensive tests for all the edge cases
 - Add some error handling examples
 - Maybe improve the documentation
 - Build a demo application that shows the exact example from the requirements
