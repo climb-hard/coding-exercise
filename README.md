@@ -47,6 +47,70 @@ The summary would provide with the following information:
 
 `  e. Germany 2 - France 2 `
 
+## Usage Examples
+
+### Basic Usage
+
+```java
+ScoreBoard scoreBoard = new LiveScoreBoard();
+
+// Start a new game
+scoreBoard.startGame("Brazil", "Argentina");
+
+// Update the score
+scoreBoard.updateScore("Brazil", "Argentina", 2, 1);
+
+// Get current games
+List<Game> games = scoreBoard.getSummary();
+System.out.println(games.get(0)); // prints: Brazil 2 - Argentina 1
+
+// Finish the game
+scoreBoard.finishGame("Brazil", "Argentina");
+```
+
+### The full example from the requirements
+
+```java
+ScoreBoard scoreBoard = new LiveScoreBoard();
+
+// Start some games
+scoreBoard.startGame("Mexico", "Canada");
+scoreBoard.startGame("Spain", "Brazil");
+scoreBoard.startGame("Germany", "France");
+scoreBoard.startGame("Uruguay", "Italy");
+scoreBoard.startGame("Argentina", "Australia");
+
+// Update the scores
+scoreBoard.updateScore("Mexico", "Canada", 0, 5);
+scoreBoard.updateScore("Spain", "Brazil", 10, 2);
+scoreBoard.updateScore("Germany", "France", 2, 2);
+scoreBoard.updateScore("Uruguay", "Italy", 6, 6);
+scoreBoard.updateScore("Argentina", "Australia", 3, 1);
+
+// Get summary - returns result sorted by total score, ties are broken by most recent
+List<Game> summary = scoreBoard.getSummary();
+// You get:
+// 1. Uruguay 6 - Italy 6 (total: 12)
+// 2. Spain 10 - Brazil 2 (total: 12) 
+// 3. Mexico 0 - Canada 5 (total: 5)
+// 4. Argentina 3 - Australia 1 (total: 4)
+// 5. Germany 2 - France 2 (total: 4)
+```
+
+### What happens when things go wrong
+
+```java
+// Trying to start the same game twice
+scoreBoard.startGame("Team A", "Team B");
+scoreBoard.startGame("Team A", "Team B"); // throws GameAlreadyExistsException
+
+// Trying to update a game that doesn't exist
+scoreBoard.updateScore("Random", "Team", 1, 0); // throws GameNotFoundException
+
+// Negative scores
+scoreBoard.updateScore("Team A", "Team B", -1, 0); // throws IllegalArgumentException
+```
+
 ## Current Implementation Status
 
 ### First step - basic functionality (COMPLETE)
@@ -70,9 +134,11 @@ The summary would provide with the following information:
 - The exact example from requirements now works correctly
 - All tests are passing
 
-### Next steps
+### Final step - documentation and polish (COMPLETE)
 
-- Add some error handling examples
-- Maybe improve the documentation
-- Build a demo application that shows the exact example from the requirements
-- Final testing to make sure everything works as expected
+- Added some basic documentation to the main API classes
+- Cleaned up the README + added some examples of usage
+
+## Running the code
+
+Just use `mvn test` to run all tests. Need Java 17 and Maven to build this.
