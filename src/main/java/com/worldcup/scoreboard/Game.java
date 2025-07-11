@@ -3,6 +3,9 @@ package com.worldcup.scoreboard;
 import java.time.Instant;
 import java.util.Objects;
 
+/**
+ * A game between two teams. Keeps track of the score and when it was created.
+ */
 public class Game {
     private final String homeTeam;
     private final String awayTeam;
